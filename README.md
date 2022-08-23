@@ -1,1 +1,3 @@
 # BlazorFullStack_TaskPlanner
+
+A simple application to manage and organize different tasks, based on basic CRUD-operations for now...
