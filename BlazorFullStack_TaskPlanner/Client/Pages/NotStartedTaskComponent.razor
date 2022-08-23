@@ -1,0 +1,47 @@
+﻿@inject ITaskPlannerService TaskPlannerService
+
+<h3>Not started</h3>
+
+@if(TaskPlannerService.tasks == null)
+{
+<div class="card" style="width: 18rem; padding: 2rem;">
+    <div class="card-body">
+        <h5 class="card-title">No tasks found.</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+    </ul>
+    <div class="card-body">
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+    </div>
+</div>
+}
+else
+{
+    @foreach(var task in TaskPlannerService.tasks)
+    {
+    <div class="card bg-light justify-content-center" style="width: 18rem; margin-bottom: 10px;">
+        <div class="card-body">
+            <h5 class="card-title">@task.TaskId: @task.TaskName</h5>
+            <p class="card-text">@task.Description</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><InputText></InputText></li>
+        </ul>
+        <div class="card-body">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+    }
+}
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await TaskPlannerService.GetAllTasks();
+    }
+}
